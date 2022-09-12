@@ -16,27 +16,32 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.button.setOnClickListener {
-            try {
-                val input = binding.editText1.text.toString().toInt()
-                q1(input)
-            } catch (e:NumberFormatException){binding.textView.text = "error"}
+        //try {
+            //var a = binding.editText1.text.toString().toFloat()
+            //var b = binding.editText2.text.toString().toFloat()
+            binding.editText1.addTextChangedListener(object : TextWatcher {
+                override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+                override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                    binding.editText2.setText (p0.toString().toInt() * 39370)
+                }
+
+                override fun afterTextChanged(p0: Editable?) {}
+
+            })
+            binding.editText2.addTextChangedListener(object : TextWatcher {
+                override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+                override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                    binding.editText1.setText (p0.toString().toInt() / 39370)
+                }
+
+                override fun afterTextChanged(p0: Editable?) {}
+
+            })
+       // } catch (e: NumberFormatException) {
+          //  binding.textView.text = "ERROR"
         }
 
     }
 
-    fun q1(i: Int) {
-        for (k in 2..i / 2) {
-            if (i >= 2 && i % k != 0) {
-                binding.textView.text = "prime"
-            } else {
-                binding.textView.text = "not prime"
-            }
-        }
-        if (i == 1 || i == 0) {
-            binding.textView.text = "not prime"
-        }
-        return
-    }
 
-}
+
