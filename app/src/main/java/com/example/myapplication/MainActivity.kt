@@ -17,23 +17,25 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.button.setOnClickListener {
-            val input = binding.editText1.text.toString().toInt()
-            q1(input)
+            try {
+                val input = binding.editText1.text.toString().toInt()
+                q1(input)
+            } catch (e:NumberFormatException){binding.textView.text = "error"}
         }
 
     }
 
     fun q1(i: Int) {
-            for (k in 2..i / 2) {
-                if (i >= 2 && i % k != 0) {
-                    binding.textView.text = "prime"
-                } else if (i == 1 || i == 0) {
-                    binding.textView.text = "not prime"
-                } else {
-                    binding.textView.text = "not prime"
-                }
+        for (k in 2..i / 2) {
+            if (i >= 2 && i % k != 0) {
+                binding.textView.text = "prime"
+            } else {
+                binding.textView.text = "not prime"
+            }
         }
-        if (i == null) {binding.textView.text = "Error"}
+        if (i == 1 || i == 0) {
+            binding.textView.text = "not prime"
+        }
         return
     }
 
