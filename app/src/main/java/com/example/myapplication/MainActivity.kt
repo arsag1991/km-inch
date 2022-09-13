@@ -24,6 +24,7 @@ class MainActivity : AppCompatActivity() {
                 if (binding.editText1.isFocused) {
                     if (binding.editText1.text.isNotEmpty()) {
                         var h = p0.toString().toFloat()
+                        binding.textView.text = ""
                         binding.editText2.setText("${h * 39370}")
 
                     } else {
@@ -43,6 +44,7 @@ class MainActivity : AppCompatActivity() {
                 if (binding.editText2.isFocused) {
                     if (binding.editText2.text.isNotEmpty()) {
                         var h = p0.toString().toFloat()
+                        binding.textView.text = ""
                         binding.editText1.setText("${h / 39370}")
                     } else {
                         binding.textView.text = "ERROR"
