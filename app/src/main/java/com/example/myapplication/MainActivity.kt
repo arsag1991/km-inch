@@ -17,31 +17,51 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         //try {
-            //var a = binding.editText1.text.toString().toFloat()
-            //var b = binding.editText2.text.toString().toFloat()
-            binding.editText1.addTextChangedListener(object : TextWatcher {
-                override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
-                override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                    binding.editText2.setText (p0.toString().toInt() * 39370)
+
+        binding.editText1.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                if (binding.editText1.isFocused) {
+                    if (binding.editText1.text.isNotEmpty()) {
+                        var h = p0.toString().toFloat()
+                        binding.editText2.setText("${h * 39370}")
+
+                    } else {
+                        binding.textView.text = "ERROR"
+                        binding.editText2.setText("")
+                    }
+                    return
                 }
+            }
 
-                override fun afterTextChanged(p0: Editable?) {}
+            override fun afterTextChanged(p0: Editable?) {}
+        })
 
-            })
-            binding.editText2.addTextChangedListener(object : TextWatcher {
-                override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
-                override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                    binding.editText1.setText (p0.toString().toInt() / 39370)
+        binding.editText2.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                if (binding.editText2.isFocused) {
+                    if (binding.editText2.text.isNotEmpty()) {
+                        var h = p0.toString().toFloat()
+                        binding.editText1.setText("${h / 39370}")
+                    } else {
+                        binding.textView.text = "ERROR"
+                        binding.editText1.setText("")
+                    }
+                    return
                 }
+            }
 
-                override fun afterTextChanged(p0: Editable?) {}
+            override fun afterTextChanged(p0: Editable?) {}
+        })
 
-            })
-       // } catch (e: NumberFormatException) {
-          //  binding.textView.text = "ERROR"
-        }
-
+        // } catch (e: Exception) {
+        //     binding.textView.text = "ERROR"
+        // }
     }
+}
+
+
 
 
 
